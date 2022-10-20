@@ -9,18 +9,6 @@ class Calendar extends Component {
 
     this.state = {
       timeRangeSelectedHandling: "Enabled",
-      onEventClick: async (args) => {
-        const modal = await DayPilot.Modal.prompt(
-          "Update event text:",
-          args.e.text()
-        );
-        if (!modal.result) {
-          return;
-        }
-        const e = args.e;
-        e.data.text = modal.result;
-        this.calendar.events.update(e);
-      },
     };
   }
 
@@ -32,7 +20,8 @@ class Calendar extends Component {
     // load event data
     this.setState({
       viewType: "Week",
-      startDate: "2022-10-13",
+      startDay: "Monday",
+      startTime: "0700",
       events: [],
     });
   }
@@ -46,16 +35,19 @@ class Calendar extends Component {
           {...this.state}
           ref={this.calendarRef}
           onTimeRangeSelected={(args) => {
-            DayPilot.Modal.prompt("New event name", "Event").then((modal) => {
-              //this.scheduler.clearSelection();
+            const form = [
+              { name: "Event", id: "event" },
+              { name: "Description", id: "desc" },
+            ];
+            DayPilot.Modal.form(form).then((modal) => {
+              console.log(modal.result);
               if (!modal.result) {
-                console.log("hello");
                 return;
               }
               const eventsOne = [...this.state.events];
               eventsOne.push({
                 id: DayPilot.guid(),
-                text: modal.result,
+                text: `${modal.result["event"]}\n${modal.result["desc"]}`,
                 start: args.start,
                 end: args.end,
               });
