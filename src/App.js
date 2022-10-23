@@ -56,6 +56,21 @@ class Calendar extends Component {
           }}
           viewType="Week"
         />
+        <button
+          onClick={() => {
+            const eventsOne = [...this.state.events];
+            eventsOne.push({
+              id: 1,
+              text: "hello",
+              start: "2022-10-26T10:30:00",
+              end: "2022-10-26T13:00:00",
+            });
+            this.setState({ ...this.state, events: eventsOne });
+            console.log("events");
+          }}
+        >
+          hello
+        </button>
       </>
     );
   }
