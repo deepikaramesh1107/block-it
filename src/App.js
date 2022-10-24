@@ -59,17 +59,31 @@ class Calendar extends Component {
         <button
           onClick={() => {
             const eventsOne = [...this.state.events];
-            eventsOne.push({
-              id: 1,
-              text: "hello",
-              start: "2022-10-26T10:30:00",
-              end: "2022-10-26T13:00:00",
-            });
+            eventsOne.push(
+              {
+                id: 1,
+                text: "lunch!",
+                start: "2022-10-26T11:30:00",
+                end: "2022-10-26T12:30:00",
+              },
+              {
+                id: 2,
+                text: "study!",
+                start: "2022-10-27T14:00:00",
+                end: "2022-10-27T16:00:00",
+              },
+              {
+                id: 3,
+                text: "study!",
+                start: "2022-10-25T10:00:00",
+                end: "2022-10-25T11:00:00",
+              }
+            );
             this.setState({ ...this.state, events: eventsOne });
             console.log("events");
           }}
         >
-          hello
+          block-it!
         </button>
       </>
     );
